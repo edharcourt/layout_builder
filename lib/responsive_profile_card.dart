@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:layout/login_screen.dart';
 
 // The main widget for this specific view
 class ResponsiveProfileCard extends StatelessWidget {
@@ -20,7 +21,6 @@ class ResponsiveProfileCard extends StatelessWidget {
           // === THE CORE LOGIC ===
           child: LayoutBuilder(
             builder: (context, constraints) {
-              print('new layout triggered!');
               if (constraints.maxWidth > 600) {
                 // Wide Layout (Row)
                 return Row(
@@ -28,7 +28,7 @@ class ResponsiveProfileCard extends StatelessWidget {
                   children: [
                     _buildAvatar(),
                     const SizedBox(width: 20),
-                    Expanded(child: _buildContent()),
+                    Expanded(child: _buildContent(context)),
                   ],
                 );
               } else {
@@ -38,7 +38,7 @@ class ResponsiveProfileCard extends StatelessWidget {
                   children: [
                     _buildAvatar(),
                     const SizedBox(height: 20),
-                    _buildContent(),
+                    _buildContent(context),
                   ],
                 );
               }
@@ -56,7 +56,7 @@ class ResponsiveProfileCard extends StatelessWidget {
     return Container(
       width: 100,
       height: 100,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.blueAccent,
         shape: BoxShape.circle, // Let's make it a circle for better UI
       ),
@@ -64,7 +64,7 @@ class ResponsiveProfileCard extends StatelessWidget {
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildContent(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min, // Important for nesting columns
@@ -81,7 +81,11 @@ class ResponsiveProfileCard extends StatelessWidget {
         const SizedBox(height: 16),
         ElevatedButton(
           onPressed: () {
-            print("Followed!");
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const LoginScreen(),
+              ),
+            );
           },
           child: const Text('Follow'),
         ),

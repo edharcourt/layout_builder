@@ -3,7 +3,7 @@ import 'package:layout/responsive_profile_card.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    const MaterialApp(
       title: 'Responsiveness Demo',
       home: ResponsiveProfileCard(),
     ),
