@@ -14,11 +14,14 @@ class ResponsiveProfileCard extends StatelessWidget {
         // so it doesn't stretch across the entire screen on a huge monitor.
         child: Container(
           color: Colors.grey[200],
-          // This constraint box is optional, but helps simulate the layout
+          // This constraint box is optional, but helps simulate the layout.
+          // Otherwise will be as wide as the screen
           constraints: const BoxConstraints(maxWidth: 800),
           padding: const EdgeInsets.all(20),
 
           // === THE CORE LOGIC ===
+          // LayoutBuilder uses sizes relative to the 
+          // parent widget, not the device size.
           child: LayoutBuilder(
             builder: (context, constraints) {
               if (constraints.maxWidth > 600) {
@@ -66,16 +69,16 @@ class ResponsiveProfileCard extends StatelessWidget {
 
   Widget _buildContent(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,  // Align Left edge
       mainAxisSize: MainAxisSize.min, // Important for nesting columns
       children: [
         const Text(
-          'Flutter Student',
+          'Poindexter Dankworth',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         const Text(
-          'Learning responsive design patterns using LayoutBuilder vs MediaQuery.',
+          'Major: Computer Science\nYear: JR\nFavorite Class: CS220',
           style: TextStyle(fontSize: 16),
         ),
         const SizedBox(height: 16),
@@ -87,7 +90,7 @@ class ResponsiveProfileCard extends StatelessWidget {
               ),
             );
           },
-          child: const Text('Follow'),
+          child: const Text('Log in'),
         ),
       ],
     );
